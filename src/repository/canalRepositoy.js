@@ -8,7 +8,7 @@ export async function canalInsert(canal) {
     `;
     const resultado = await con.query(comando, [canal.canal, canal.numero, canal.aberto]);
     
-    const dados = resultado[0];
+    const dados = resultado[1];
     return dados.insertId;
 }
 

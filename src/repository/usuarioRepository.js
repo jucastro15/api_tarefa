@@ -1,10 +1,15 @@
+import con from './connection.js';
+
 
 export async function usuarioR(usuario) {
     const comando = `
+        
         INSERT INTO tb_usuario (nm_usuario)
-        VALUES (?)
-    `;
-    const [resultado] = await con.query(comando, [usuario]);
+        VALUES (?)`
+    
+    ;
+    const resultado = await con.query(comando, [usuario]);
+    
     const dados = resultado[0];
     return dados.insertId;
 }

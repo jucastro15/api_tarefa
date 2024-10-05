@@ -7,7 +7,7 @@ endpoint.post("/programaFavorito", async (req, resp) => {
     try {
         const favorito = req.body;
         const idProgramaFavorito = await db.programaFv(favorito);
-        resp.json({ id: idProgramaFavorito});
+        resp.status(200).send({ id: idProgramaFavorito});
     } catch (err) {
         resp.status(400).send({ erro: err.message });
     }
@@ -17,7 +17,7 @@ endpoint.post("/programaFavorito", async (req, resp) => {
 endpoint.get("/programaFavorito", async (req, resp) => {
     try {
         const favoritos = await db.programaFvG();
-        resp.json(
+        resp.status(200).send(
             { favoritos: favoritos }
         );
     } catch (err) {

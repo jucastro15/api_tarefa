@@ -6,7 +6,7 @@ endpoint.post("/canalProg", async (req, resp) => {
     try {
         const programa = req.body;
         const idCanalProg = await db.canalProgramaInsert(programa);
-        resp.json({ idCanalProg:idCanalProg});
+        resp.status(200).send({ idCanalProg:idCanalProg});
 
     } catch (err) {
         resp.status(400).send({ erro: err.message });
@@ -17,7 +17,7 @@ endpoint.post("/canalProg", async (req, resp) => {
 endpoint.get("/canalProg", async (req, resp) => {
     try {
         const programas = await db.canalProgramaSelect();
-        resp.json(programas);
+        resp.status(200).send({ programas: programas });
     } catch (err) {
         resp.status(400).send({ erro: err.message });
     }

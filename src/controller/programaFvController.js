@@ -6,7 +6,7 @@ const endpoint = Router();
 endpoint.post("/programaFavorito", async (req, resp) => {
     try {
         const favorito = req.body;
-        const idProgramaFavorito = await db.programaFavoritoInsert(favorito);
+        const idProgramaFavorito = await db.programaFv(favorito);
         resp.json({ id: idProgramaFavorito});
     } catch (err) {
         resp.status(400).send({ erro: err.message });
@@ -16,7 +16,7 @@ endpoint.post("/programaFavorito", async (req, resp) => {
 
 endpoint.get("/programaFavorito", async (req, resp) => {
     try {
-        const favoritos = await db.programaFavoritoSelect();
+        const favoritos = await db.programaFvG();
         resp.json(
             { favoritos: favoritos }
         );
@@ -29,7 +29,7 @@ endpoint.put("/programaFavorito/:id", async (req, resp) => {
     try {
         const id = req.params;
         const favorito = req.body;
-        await db.programaFavoritoUpdate(favorito, id);
+        await db.programaFvU(favorito, id);
 
 
         resp.status(204).send();
@@ -43,7 +43,7 @@ endpoint.put("/programaFavorito/:id", async (req, resp) => {
 endpoint.delete("/programaFavorito/:id", async (req, resp) => {
     try {
         const id = req.params;
-        await db.programaFavoritoDelete(id);
+        await db.programaFvD(id);
 
 
         resp.status(204).send();

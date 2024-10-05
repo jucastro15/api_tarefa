@@ -20,7 +20,7 @@ endpoint.post("/canal", async (req, resp) => {
 
 endpoint.get("/canal", async (req, resp) => {
     try {
-        const canais = await db.canalSelect();
+        const canais = await db.canalG();
 
         resp.json(canais);
     } catch (err) {
@@ -36,7 +36,7 @@ endpoint.put("/canal/:id", async (req, resp) => {
         const  id  = req.params;
         const canal = req.body;
 
-         await db.canalUpdate(canal, id);
+         await db.canalU(canal, id);
 
             resp.status(204).send();
        

@@ -4,19 +4,23 @@ const endpoint = Router();
 
 endpoint.post("/usuario", async (req, resp) => {
     try {
-        const usuario = req.body.usuario;
-        const idUsuario = await db.usuarioR({ usuario: usuario });
-        resp.json({ idUsuario });
+        const { usuario } = req.body;
+
+        const idUsuario = await db.usuarioR(usuario);
+        resp.status(200).send({ idUsuario: idUsuario });
+
     } catch (err) {
-        resp.status(400).send({ erro: err.message });
+        resp.status(400).send({
+            erro: err.message
+        });
     }
 });
 
 
 endpoint.get("/usuario", async (req, resp) => {
     try {
-        const usuarios = await db.usuarioG();
-        resp.json({ usuarios: usuarios });
+        const usuario = await db.usuarioG();
+        resp.status(200).send( usuario);
     } catch (err) {
         resp.status(400).send({ erro: err.message });
     }
@@ -25,8 +29,8 @@ endpoint.get("/usuario", async (req, resp) => {
 
 endpoint.put("/usuario/:id", async (req, resp) => {
     try {
-        const id = req.params;
-        const usuario = req.body;
+        const {id} = req.params;
+        const {usuario} = req.body;
         await db.usuarioU(usuario, id);
 
 
@@ -40,7 +44,7 @@ endpoint.put("/usuario/:id", async (req, resp) => {
 
 endpoint.delete("/usuario/:id", async (req, resp) => {
     try {
-        const id = req.params;
+        const {id} = req.params;
         await db.usuarioD(id);
 
         resp.status(204).send();

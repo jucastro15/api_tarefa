@@ -9,7 +9,7 @@ endpoint.post("/canal", async (req, resp) => {
         const canal = req.body;
         const idCanal = await db.canalInsert(canal);
 
-        resp.json({ idCanal: idCanal });
+        resp.status(200).send({ idCanal: idCanal });
     } catch (err) {
         resp.status(400).send({
             erro: err.message
@@ -22,7 +22,7 @@ endpoint.get("/canal", async (req, resp) => {
     try {
         const canais = await db.canalG();
 
-        resp.json(canais);
+        resp.status(200).send(canais);
     } catch (err) {
         resp.status(400).send({
             erro: err.message
@@ -33,7 +33,7 @@ endpoint.get("/canal", async (req, resp) => {
 
 endpoint.put("/canal/:id", async (req, resp) => {
     try {
-        const  id  = req.params;
+        const { id } = req.params;
         const canal = req.body;
 
          await db.canalU(canal, id);
@@ -50,7 +50,7 @@ endpoint.put("/canal/:id", async (req, resp) => {
 
 endpoint.delete("/canal/:id", async (req, resp) => {
     try {
-        const  id  = req.params;
+        const { id}  = req.params;
 
         await db.canalDelete(id);
 

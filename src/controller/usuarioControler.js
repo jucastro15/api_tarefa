@@ -6,12 +6,9 @@ endpoint.post("/usuario", async (req, resp) => {
     try {
         const { usuario } = req.body;
 
-        if (!usuario) {
-            return resp.status(400).send({ erro: "Usuário é obrigatório." });
-        }
-
         const idUsuario = await db.usuarioR(usuario);
-        resp.status(200).send({ idUsuario });
+        resp.status(200).send({ idUsuario: idUsuario });
+
     } catch (err) {
         resp.status(400).send({
             erro: err.message
@@ -22,8 +19,8 @@ endpoint.post("/usuario", async (req, resp) => {
 
 endpoint.get("/usuario", async (req, resp) => {
     try {
-        const usuarios = await db.usuarioG();
-        resp.status(200).send({ usuarios: usuarios });
+        const usuario = await db.usuarioG();
+        resp.status(200).send( usuario);
     } catch (err) {
         resp.status(400).send({ erro: err.message });
     }
@@ -32,8 +29,8 @@ endpoint.get("/usuario", async (req, resp) => {
 
 endpoint.put("/usuario/:id", async (req, resp) => {
     try {
-        const id = req.params;
-        const usuario = req.body;
+        const {id} = req.params;
+        const {usuario} = req.body;
         await db.usuarioU(usuario, id);
 
 
@@ -47,7 +44,7 @@ endpoint.put("/usuario/:id", async (req, resp) => {
 
 endpoint.delete("/usuario/:id", async (req, resp) => {
     try {
-        const id = req.params;
+        const {id} = req.params;
         await db.usuarioD(id);
 
         resp.status(204).send();

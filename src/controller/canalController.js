@@ -33,7 +33,7 @@ endpoint.get("/canal", async (req, resp) => {
 
 endpoint.put("/canal/:id", async (req, resp) => {
     try {
-        const  id  = req.params;
+        const { id } = req.params;
         const canal = req.body;
 
          await db.canalU(canal, id);
@@ -50,7 +50,7 @@ endpoint.put("/canal/:id", async (req, resp) => {
 
 endpoint.delete("/canal/:id", async (req, resp) => {
     try {
-        const  id  = req.params;
+        const { id}  = req.params;
 
         await db.canalDelete(id);
 

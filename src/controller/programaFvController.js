@@ -7,7 +7,7 @@ endpoint.post("/programaFavorito", async (req, resp) => {
     try {
         const favorito = req.body;
         const idProgramaFavorito = await db.programaFv(favorito);
-        resp.status(200).send({ id: idProgramaFavorito});
+        resp.status(200).send({ idProgramaFavorito: idProgramaFavorito});
     } catch (err) {
         resp.status(400).send({ erro: err.message });
     }
@@ -18,7 +18,7 @@ endpoint.get("/programaFavorito", async (req, resp) => {
     try {
         const favoritos = await db.programaFvG();
         resp.status(200).send(
-            { favoritos: favoritos }
+             favoritos
         );
     } catch (err) {
         resp.status(400).send({ erro: err.message });
@@ -27,7 +27,7 @@ endpoint.get("/programaFavorito", async (req, resp) => {
 
 endpoint.put("/programaFavorito/:id", async (req, resp) => {
     try {
-        const id = req.params;
+        const { id }= req.params;
         const favorito = req.body;
         await db.programaFvU(favorito, id);
 
@@ -42,7 +42,7 @@ endpoint.put("/programaFavorito/:id", async (req, resp) => {
 
 endpoint.delete("/programaFavorito/:id", async (req, resp) => {
     try {
-        const id = req.params;
+        const {id} = req.params;
         await db.programaFvD(id);
 
 

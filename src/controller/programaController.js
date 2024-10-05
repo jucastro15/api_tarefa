@@ -17,7 +17,7 @@ endpoint.post("/canalProg", async (req, resp) => {
 endpoint.get("/canalProg", async (req, resp) => {
     try {
         const programas = await db.canalProgramaSelect();
-        resp.status(200).send({ programas: programas });
+        resp.status(200).send( programas);
     } catch (err) {
         resp.status(400).send({ erro: err.message });
     }
@@ -26,7 +26,7 @@ endpoint.get("/canalProg", async (req, resp) => {
 
 endpoint.put("/canalProg/:id", async (req, resp) => {
     try {
-        const  id  = req.params;
+        const { id } = req.params;
         const programa = req.body;
       await db.canalProgramaUpdate(programa, id);
 
@@ -41,7 +41,7 @@ endpoint.put("/canalProg/:id", async (req, resp) => {
 
 endpoint.delete("/canalProg/:id", async (req, resp) => {
     try {
-        const  id  = req.params;
+        const { id}  = req.params;
        await db.canalProgramaDelete(id);
 
             resp.status(204).send();
